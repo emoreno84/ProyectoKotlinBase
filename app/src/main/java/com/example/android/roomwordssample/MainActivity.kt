@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, NewWordActivity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
         }
-
         
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
@@ -64,8 +63,8 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let { reply ->
-                val book = Book(reply[0].toString(), reply[1].toString(), reply[2].toString())
-                wordViewModel.insert(book)
+                val word = Book(reply, "", "")
+                wordViewModel.insert(word)
             }
         } else {
             Toast.makeText(
