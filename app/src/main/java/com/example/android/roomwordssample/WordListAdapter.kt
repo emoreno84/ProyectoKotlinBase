@@ -37,12 +37,12 @@ class WordListAdapter : ListAdapter<Book, WordViewHolder>(WORDS_COMPARATOR) {
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val wordItemView: TextView = itemView.findViewById(R.id.textViewTitulo)
-        private val genItemView: TextView = itemView.findViewById(R.id.textViewGenero)
-        private val autorItemView: TextView = itemView.findViewById(R.id.textViewAutor)
+        private val tituloItemView: TextView = itemView.findViewById(R.id.textViewTitulo)
+        //private val genItemView: TextView = itemView.findViewById(R.id.textViewGenero)
+        //private val autorItemView: TextView = itemView.findViewById(R.id.textViewAutor)
 
         fun bind(text: String?) {
-            wordItemView.text = text
+            tituloItemView.text = text
         }
 
         companion object {

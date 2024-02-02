@@ -88,7 +88,7 @@ abstract class WordRoomDatabase : RoomDatabase() {
             // Not needed if you only populate on creation.
             wordDao.deleteAll()
 
-            var book = Book("El señór de los anillos", "Fantasía", "Tolkien")
+            var book = Book("El señor de los anillos", "Fantasía", "Tolkien")
             wordDao.insert(book)
             book = Book("Harry Potter", "Fantasía", "J.K. Rowling")
             wordDao.insert(book)

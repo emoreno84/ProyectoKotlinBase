@@ -16,12 +16,14 @@
 
 package com.example.android.roomwordssample
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -30,22 +32,39 @@ import androidx.appcompat.app.AppCompatActivity
 
 class NewWordActivity : AppCompatActivity() {
 
+    private val wordViewModel: WordViewModel by viewModels {
+        WordViewModelFactory((application as WordsApplication).repository)
+    }
+    @SuppressLint("MissingInflatedId")
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_word)
-        val editWordView = findViewById<EditText>(R.id.edit_word)
+        val editTextTitulo = findViewById<EditText>(R.id.edit_titulo)
+        val editTextGenero = findViewById<EditText>(R.id.edit_genero)
+        val editTextAutor = findViewById<EditText>(R.id.edit_autor)
+
 
         val button = findViewById<Button>(R.id.button_save)
         val buttonBack = findViewById<Button>(R.id.button_back)
 
         button.setOnClickListener {
             val replyIntent = Intent()
-            if (TextUtils.isEmpty(editWordView.text)) {
+
+            if (TextUtils.isEmpty(editTextTitulo.text) || TextUtils.isEmpty(editTextGenero.text) || TextUtils.isEmpty(editTextAutor.text)) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
-                val word = editWordView.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY, word)
-                setResult(Activity.RESULT_OK, replyIntent)
+                val titulo = editTextTitulo.text.toString()
+                val genero = editTextGenero.text.toString()
+                val autor = editTextAutor.text.toString()
+
+                var book = Book(titulo, genero, autor)
+                wordViewModel.insert(book)
+/*                replyIntent.putExtra(EXTRA_REPLY, autor)
+                replyIntent.putExtra(EXTRA_REPLY, genero)
+                replyIntent.putExtra(EXTRA_REPLY, titulo)
+                setResult(Activity.RESULT_OK, replyIntent)*/
+
+
             }
             finish()
         }

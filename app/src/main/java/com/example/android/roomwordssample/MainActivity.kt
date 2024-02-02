@@ -64,8 +64,8 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             intentData?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let { reply ->
-                val word = Boork(reply)
-                wordViewModel.insert(word)
+                val book = Book(reply[0].toString(), reply[1].toString(), reply[2].toString())
+                wordViewModel.insert(book)
             }
         } else {
             Toast.makeText(
