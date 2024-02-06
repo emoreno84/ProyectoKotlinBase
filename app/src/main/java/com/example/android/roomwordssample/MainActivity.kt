@@ -44,17 +44,22 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
+        val btnDelAll = findViewById<FloatingActionButton>(R.id.DelAll)
         fab.setOnClickListener {
             val intent = Intent(this@MainActivity, NewWordActivity::class.java)
             startActivityForResult(intent, newWordActivityRequestCode)
+        }
+
+        btnDelAll.setOnClickListener {
+            wordViewModel.deleteAll()
         }
         
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        wordViewModel.allWords.observe(owner = this) { words ->
+        wordViewModel.allWords.observe(owner = this) { books ->
             // Update the cached copy of the words in the adapter.
-            words.let { adapter.submitList(it) }
+            books.let { adapter.submitList(it) }
         }
     }
 

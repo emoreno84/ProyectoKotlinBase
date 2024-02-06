@@ -59,11 +59,10 @@ class NewWordActivity : AppCompatActivity() {
 
                 var book = Book(titulo, genero, autor)
                 wordViewModel.insert(book)
-/*                replyIntent.putExtra(EXTRA_REPLY, autor)
+/*              replyIntent.putExtra(EXTRA_REPLY, autor)
                 replyIntent.putExtra(EXTRA_REPLY, genero)
                 replyIntent.putExtra(EXTRA_REPLY, titulo)
                 setResult(Activity.RESULT_OK, replyIntent)*/
-
 
             }
             finish()

@@ -19,7 +19,8 @@ limitations under the License. -->
     <string name="hint_genero">Género…</string>
     <string name="hint_Autor">Autor…</string>
     <string name="button_save">Save</string>
-    <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="empty_not_saved">Book not saved because it is empty.</string>
     <string name="add_word">Add word</string>
+    <string name="del_all">Delete all</string>
     <string name="button_back">BACK</string>
 </resources>

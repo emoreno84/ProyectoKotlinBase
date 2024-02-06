@@ -16,16 +16,30 @@
 
 package com.example.android.roomwordssample
 
+import android.app.Application
+import android.content.ContentValues.TAG
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.roomwordssample.WordListAdapter.WordViewHolder
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class WordListAdapter : ListAdapter<Book, WordViewHolder>(WORDS_COMPARATOR) {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         return WordViewHolder.create(parent)
@@ -40,11 +54,19 @@ class WordListAdapter : ListAdapter<Book, WordViewHolder>(WORDS_COMPARATOR) {
         private val tituloItemView: TextView = itemView.findViewById(R.id.textViewTitulo)
         private val genItemView: TextView = itemView.findViewById(R.id.textViewGenero)
         private val autorItemView: TextView = itemView.findViewById(R.id.textViewAutor)
+        private val botonDelete: ImageButton = itemView.findViewById(R.id.buttonDelete)
 
         fun bind(textTitulo: String?, textGen: String?, textAutor: String?) {
             tituloItemView.text = textTitulo
             genItemView.text = textGen
             autorItemView.text = textAutor
+            botonDelete.setOnClickListener{
+                borrar()
+            }
+        }
+
+        private fun borrar() {
+            Log.d(TAG, "Se ha pulsado el botón de borrado");
         }
 
         companion object {

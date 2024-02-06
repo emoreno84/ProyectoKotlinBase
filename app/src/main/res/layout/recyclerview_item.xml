@@ -47,18 +47,18 @@ limitations under the License. -->
         android:layout_alignParentRight="true">
 
         <ImageButton
-            android:id="@+id/buttonEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-<!--            android:src="">-->
-        </ImageButton>
-
-        <ImageButton
             android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/buttonEdit">
-<!--            android:src="">-->
+            android:src="@drawable/ic_delete">
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/buttonEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonDelete"
+            android:src="@drawable/ic_edit">
         </ImageButton>
 
     </RelativeLayout>

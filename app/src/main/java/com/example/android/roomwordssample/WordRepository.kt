@@ -36,4 +36,8 @@ class WordRepository(private val wordDao: WordDao) {
     suspend fun insert(word: Book) {
         wordDao.insert(word)
     }
+
+    suspend fun deleteAll(){
+        wordDao.deleteAll()
+    }
 }
