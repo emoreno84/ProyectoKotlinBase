@@ -17,6 +17,7 @@
 package com.example.android.roomwordssample
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -45,5 +46,7 @@ interface WordDao {
     @Query("DELETE FROM word_table")
     suspend fun deleteAll()
 
+    @Query("DELETE FROM word_table WHERE word = :titulo")
+    suspend fun delete(titulo: String)
 
 }

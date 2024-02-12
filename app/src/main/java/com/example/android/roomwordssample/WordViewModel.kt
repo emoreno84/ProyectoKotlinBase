@@ -46,6 +46,10 @@ class WordViewModel(private val repository: WordRepository) : ViewModel() {
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
     }
+
+    fun delete(titulo : String) = viewModelScope.launch {
+        repository.delete(titulo)
+    }
 }
 
 class WordViewModelFactory(private val repository: WordRepository) : ViewModelProvider.Factory {

@@ -17,8 +17,11 @@
 package com.example.android.roomwordssample
 
 import android.app.Application
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
+import android.provider.UserDictionary.Words
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -37,9 +40,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class WordListAdapter : ListAdapter<Book, WordViewHolder>(WORDS_COMPARATOR) {
-
-
+class WordListAdapter() : ListAdapter<Book, WordViewHolder>(WORDS_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
         return WordViewHolder.create(parent)
@@ -48,25 +49,29 @@ class WordListAdapter : ListAdapter<Book, WordViewHolder>(WORDS_COMPARATOR) {
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current.word, current.autor, current.genero)
+        holder.itemView.setOnClickListener {
+            //Log.d(ContentValues.TAG, "Se ha pulsado en el item que tiene:");
+            //Log.d(ContentValues.TAG, "Título: " + current.word);
+            //Log.d(ContentValues.TAG, "Género: " + current.genero);
+            //Log.d(ContentValues.TAG, "Autor: " + current.autor);
+            val intent = Intent(it.context, BookDetailsActivity::class.java)
+            intent.putExtra("titulo",current.word)
+            intent.putExtra("genero",current.genero)
+            intent.putExtra("autor",current.autor)
+            it.context.startActivity(intent)
+
+        }
     }
 
     class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tituloItemView: TextView = itemView.findViewById(R.id.textViewTitulo)
         private val genItemView: TextView = itemView.findViewById(R.id.textViewGenero)
         private val autorItemView: TextView = itemView.findViewById(R.id.textViewAutor)
-        private val botonDelete: ImageButton = itemView.findViewById(R.id.buttonDelete)
 
-        fun bind(textTitulo: String?, textGen: String?, textAutor: String?) {
+        fun bind(textTitulo: String, textGen: String?, textAutor: String?) {
             tituloItemView.text = textTitulo
             genItemView.text = textGen
             autorItemView.text = textAutor
-            botonDelete.setOnClickListener{
-                borrar()
-            }
-        }
-
-        private fun borrar() {
-            Log.d(TAG, "Se ha pulsado el botón de borrado");
         }
 
         companion object {
